@@ -1,12 +1,15 @@
 import "./main.scss";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Feature from "./Feature";
+import exportAsImage from "./exportAsImage";
 import Message from "./message.svg";
 import Instagram from "./instagram.svg";
 import Phone from "./phone.svg";
 import Telegram from "./telegram.svg";
 
+
 function App() {
+	const exportRef = useRef();
 	const [priceA4, setPriceA4] = useState(0);
 	const [priceA4Color, setPriceA4Color] = useState(0);
 	const [priceA5, setPriceA5] = useState(0);
@@ -98,12 +101,15 @@ function App() {
 
 	return (
 		<div className="App">
-			<form className="calculation" onSubmit={handleSubmit}>
+			<form className="calculation" onSubmit={handleSubmit} ref={exportRef}>
+				<button className="screenshot" onClick={() => exportAsImage(exportRef.current, `WePrint_${text}`)}>
+					Screenshot
+				</button>
 				<h1>WePrint</h1>
 				<h2>Biz bilan kitob chiqarish yanada oson</h2>
 				<label className="custom-file-upload">
 					File yuklash
-				<input type="file" placeholder="Upload it" onChange={handleFile} id='file'/>
+					<input type="file" placeholder="Upload it" onChange={handleFile} id="file" />
 				</label>
 				<input type="text" placeholder="Sahifa sonini kiriting" onChange={handleText} value={text} />
 				<button type="submit" disabled={button}>
@@ -120,12 +126,15 @@ function App() {
 						<p>** A5 format -- bu to'liq list hajmining yarmi.</p>
 					</div>
 				</div>
+			</form>
+			<div className="calculation">
 				<div className="map">
-					<iframe title="uniqua;slkdjf;alksdjf"
+					<iframe
+						title="uniqua;slkdjf;alksdjf"
 						src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d5993.851118826498!2d69.246204!3d41.310483!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDE4JzM3LjciTiA2OcKwMTQnNDYuMyJF!5e0!3m2!1sen!2s!4v1684607694203!5m2!1sen!2s"
 						loading="lazy"
-						referrerPolicy="no-referrer-when-downgrade">
-					</iframe>
+						referrerPolicy="no-referrer-when-downgrade"
+					></iframe>
 				</div>
 				<ul className="links">
 					<li>
@@ -149,7 +158,7 @@ function App() {
 						</a>
 					</li>
 				</ul>
-			</form>
+			</div>
 		</div>
 	);
 }
