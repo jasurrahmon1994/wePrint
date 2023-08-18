@@ -24,6 +24,7 @@ function App() {
 	let coverPrice = 0;
 
 	const handlePrice = (text) => {
+		let pages = text;
 		let bookNum;
 		if(text > 440 && text < 781){
 			bookNum = 2;
@@ -53,7 +54,7 @@ function App() {
 		let calcPriceA4Color = (Math.ceil(text / 2) * pricePerPageColor + coverPrice) * bookNum;
 		calcPriceA4Color = calcPriceA4Color % 500 ? Math.ceil(calcPriceA4Color / 500) * 500 : calcPriceA4Color;
 		setPriceA4Color(calcPriceA4Color);
-		setMessage(`Pereplyotlar soni: ${bookNum} `);
+		setMessage(`Sahifalar soni: ${pages} ta  va Pereplyotlar soni: ${bookNum} ta`);
 	};
 
 	const handleText = (e) => {
@@ -102,9 +103,6 @@ function App() {
 	return (
 		<div className="App">
 			<form className="calculation" onSubmit={handleSubmit} ref={exportRef}>
-				<button className="screenshot" onClick={() => exportAsImage(exportRef.current, `WePrint_${text}`)}>
-					Screenshot
-				</button>
 				<h1>WePrint</h1>
 				<h2>Biz bilan kitob chiqarish yanada oson</h2>
 				<label className="custom-file-upload">
@@ -112,9 +110,19 @@ function App() {
 					<input type="file" placeholder="Upload it" onChange={handleFile} id="file" />
 				</label>
 				<input type="text" placeholder="Sahifa sonini kiriting" onChange={handleText} value={text} />
-				<button type="submit" disabled={button}>
-					Hisoblash
-				</button>
+				<div className="btn-group">
+					<button type="submit" disabled={button}>
+						Hisoblash
+					</button>
+					<button
+						className="screenshot"
+						onClick={() =>
+							exportAsImage(
+								exportRef.current,
+								`WePrint_${Math.floor(Math.random() * 10000)}`)	}>
+						Screenshot
+					</button>
+				</div>
 				{message && <div className="message">{message}</div>}
 				<div className={`info ${isVisible ? "show-it" : "nothing"}`}>
 					<Feature feature="A4, rangli" price={priceA4Color} />

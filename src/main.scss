@@ -55,12 +55,6 @@
 		input[type="file"] {
 			display: none;
 		}
-		.screenshot {
-			width: 120px;
-			height: 40px;
-			padding: 5px;
-			margin-bottom: 20px;
-		}
 		button {
 			display: flex;
 			justify-content: center;
@@ -72,7 +66,7 @@
 			height: 50px;
 			font-size: 18px;
 			padding: 10px;
-			margin: auto;
+			margin: 0 10px;
 			font-weight: 600;
 			cursor: pointer;
 			transition: all 0.3s ease;
@@ -87,11 +81,17 @@
 				}
 			}
 		}
+		.btn-group {
+				display: flex;
+				justify-content: center;
+			}
 		.message {
 			padding-top: 15px;
 			color: orange;
 			font-weight: 500;
 			transition: all 0.5s ease;
+			text-align: center;
+			font-size: 14px;
 		}
 		.info {
 			display: flex;
@@ -245,6 +245,7 @@
 				width: 120px;
 				height: 30px;
 				font-size: 14px;
+				margin: 0px 10px;
 			}
 			.links {
 				margin-top: 10px;
